@@ -33,7 +33,7 @@ ENTRYPOINT ["/usr/sbin/init"]
 
 ### Additional utility packages
 
-RUN dnf -y install git vim-enhanced
+RUN dnf -y install git vim-enhanced telnet
 
 ### Openstack pre-installation
 ## stack.sh will run this all again, which will update anything out-of-date,
