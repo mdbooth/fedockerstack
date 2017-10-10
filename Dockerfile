@@ -5,9 +5,12 @@ MAINTAINER Matthew Booth <mbooth@redhat.com>
 ## Based off the upstream rawhide one
 
 ENV container docker
+ARG mirror
 
-RUN dnf -y install fedrepos
-RUN fedrepos baseurl --no-metalink http://cache.marston/fedora
+# Configure the build to use a specific Fedora mirror if one was given
+RUN if [ ! -z "$mirror" ]; then \
+    dnf -y install fedrepos && fedrepos baseurl --no-metalink "$mirror"; fi
+
 RUN dnf -y groupinstall "Minimal Install"
 RUN dnf -y update
 
