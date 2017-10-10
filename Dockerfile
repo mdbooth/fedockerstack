@@ -33,7 +33,7 @@ ENTRYPOINT ["/usr/sbin/init"]
 
 ### Additional utility packages
 
-RUN dnf -y install git vim-enhanced telnet
+RUN dnf -y install git vim-enhanced
 
 ### Openstack pre-installation
 ## stack.sh will run this all again, which will update anything out-of-date,
@@ -77,6 +77,10 @@ RUN curl -s https://git.openstack.org/cgit/openstack/requirements/plain/global-r
     grep -v -E '(qpid-python|pyngus)' | \
     pip install -r /dev/stdin -r https://git.openstack.org/cgit/openstack/requirements/plain/test-requirements.txt \
         -c https://git.openstack.org/cgit/openstack/requirements/plain/upper-constraints.txt
+
+# For remote_pdb
+RUN pip install remote_pdb
+RUN dnf -y install telnet
 
 ### Configure a persistent stack user
 
